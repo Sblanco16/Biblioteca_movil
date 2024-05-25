@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1097975574150",
+    "project_id": "rubricamovil-f9e8b",
+    "storage_bucket": "rubricamovil-f9e8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097975574150:android:686ad14483b62027a22b07",
+        "android_client_info": {
+          "package_name": "com.example.rubricatres"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkkplUMspCcuyWUqL3CqSRQNzASBXydgI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
