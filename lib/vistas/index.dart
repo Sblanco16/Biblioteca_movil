@@ -8,7 +8,7 @@ class Index extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Bienvenidos a la Biblioteca'),
+        title: const Text('Biblioteca Shadai 📚✨'),
         backgroundColor: Colors.blue,
       ),
       body: Center(
@@ -17,8 +17,16 @@ class Index extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+            //    Container(
+            //     decoration: const BoxDecoration(
+            //     image: DecorationImage(
+            //     image: AssetImage("/Images/fondoindex.jpg"),
+            //     fit: BoxFit.cover, 
+            //     ),
+            //   ),
+            // ),
               const Text(
-                'Bienvenidos a la Biblioteca',
+                'Bienvenidos a nuestra Biblioteca',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,

@@ -10,7 +10,6 @@ class Usuario{
   final String genero;
  
 
-
   Usuario({
     required this.id,
     required this.nombre,

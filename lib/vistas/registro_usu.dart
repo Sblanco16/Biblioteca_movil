@@ -150,13 +150,13 @@ class _RegistroUsuState extends State<RegistroUsu> {
                       );
                      
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Usuario registrado con éxito')),
+                        SnackBar(content: Text('Usuario registrado :)')),
                       );
                       Navigator.pop(context);
                     } catch (e) {
                      
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Error al registrar usuario: $e')),
+                        SnackBar(content: Text('Error al registrar usuario :( ): $e')),
                       );
                     }
                   } else {

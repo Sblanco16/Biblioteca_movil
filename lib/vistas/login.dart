@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rubricatres/metodos_firebase/metodos.dart';
-import 'package:rubricatres/pantallas/usuario.dart';
+import 'package:rubricatres/vistas/usuario.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -10,10 +12,12 @@ class Login extends StatefulWidget {
 }
 
 class LoginState extends State<Login> {
+  @override 
+  void initState(){super.initState();Validarpref();}
   final TextEditingController correoController = TextEditingController();
   final TextEditingController contrasenaController = TextEditingController();
   final Servicios servicios = Servicios();
-
+  
   void loginUsuario() async {
     String correo = correoController.text.trim();
     String contrasena = contrasenaController.text.trim();
@@ -26,15 +30,27 @@ class LoginState extends State<Login> {
           const SnackBar(content: Text('Bienvenido')),
         );
         String nombreUsuario = userDoc['nombre']; 
+        String apellidoUsuario = userDoc['apellido'];
+        String correoUsuario = userDoc['correo'];
+        String generoUsuario = userDoc['genero'];
+        String idUsuario = userDoc.id;
+        print(idUsuario);
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        await pref.setString('name', nombreUsuario);
+        await pref.setString('last_name', apellidoUsuario);
+        await pref.setString('email', correoUsuario);
+        await pref.setString('genre', generoUsuario);
+        await pref.setString('id', idUsuario);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => Usuario(nombre: nombreUsuario),
           ),
         );
+
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error al iniciar sesión')),
+          const SnackBar(content: Text('Error! usuario o contraseña incorrecta')),
         );
       }
     } else {
@@ -43,6 +59,23 @@ class LoginState extends State<Login> {
       );
     }
   }
+
+  Future <void> Validarpref() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String? preference = pref.getString('id');
+    String? nombre = pref.getString('name');
+    
+    if(preference != null && nombre != null){
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Usuario(nombre: nombre)
+          ),
+        );
+    }else{
+      print('ou nouu');
+    }
+  } 
 
   @override
   Widget build(BuildContext context) {

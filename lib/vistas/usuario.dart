@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Usuario extends StatelessWidget {
   final String nombre;
@@ -26,7 +27,7 @@ class Usuario extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  'Bienvenido, ',
+                  'Te damos la bienvenida, ',
                   style: TextStyle(fontSize: 20),
                 ),
                 Text(
@@ -47,6 +48,13 @@ class Usuario extends StatelessWidget {
               },
             ),
             ListTile(
+              leading: Icon(Icons.library_add, color: Colors.blue),
+              title: Text('Agregar libro'),
+              onTap: () {
+                Navigator.pushNamed(context, '/AggLibros');
+              },
+            ),
+            ListTile(
               leading: Icon(Icons.book, color: Colors.blue),
               title: Text('Mis Reservas'),
               onTap: () {
@@ -57,16 +65,18 @@ class Usuario extends StatelessWidget {
               leading: Icon(Icons.library_books, color: Colors.blue),
               title: Text('Catálogo de Libros'),
               onTap: () {
-                Navigator.pushNamed(context, '/catalogo');
+                Navigator.pushNamed(context, '/Catalogo');
               },
             ),
             ListTile(
               leading: Icon(Icons.exit_to_app, color: Colors.blue),
               title: Text('Cerrar Sesión'),
-              onTap: () {
+              onTap: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                pref.clear();
                 Navigator.pushNamedAndRemoveUntil(context, '/login', (Route<dynamic> route) => false);
               },
-            ),
+            ),  
           ],
         ),
       ),
