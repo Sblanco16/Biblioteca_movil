@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-
 class Servicios {
-  
   final FirebaseFirestore fs = FirebaseFirestore.instance;
-  
 
 //REGISTRO DE USUARIO
   Future<void> registroUsuario(String nombre, String apellido, String correo,
@@ -114,6 +111,8 @@ class Servicios {
     }
   }
 
+  // Obtener la lista de libros reservados por un usuario
+
   // Reservar libro
   Future<void> reservarLibro(String libroId, String userId) async {
     try {
@@ -126,6 +125,4 @@ class Servicios {
       print('Error al reservar libro: $e');
     }
   }
-
-  
 }

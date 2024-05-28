@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rubricatres/metodos_firebase/metodos.dart';
 import 'package:rubricatres/vistas/usuario.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
+
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -44,7 +44,7 @@ class LoginState extends State<Login> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Usuario(nombre: nombreUsuario),
+            builder: (context) => Usuario(nombre: nombreUsuario, id: idUsuario),
           ),
         );
 
@@ -62,14 +62,14 @@ class LoginState extends State<Login> {
 
   Future <void> Validarpref() async{
     SharedPreferences pref = await SharedPreferences.getInstance();
-    String? preference = pref.getString('id');
+    String? id = pref.getString('id');
     String? nombre = pref.getString('name');
     
-    if(preference != null && nombre != null){
+    if(id != null && nombre != null){
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Usuario(nombre: nombre)
+            builder: (context) => Usuario(nombre: nombre, id: id)
           ),
         );
     }else{

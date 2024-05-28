@@ -10,8 +10,6 @@ import 'package:rubricatres/vistas/perfil.dart';
 import 'package:rubricatres/vistas/catalogo.dart';
 import 'package:rubricatres/vistas/reservas.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -37,15 +35,15 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Index(),
         '/login': (context) => const Login(),
         '/registro': (context) => const RegistroUsu(),
-        '/usuario': (context) => Usuario(nombre: '', ),
-        '/perfil': (context) => Perfil(userId: ''),
+        '/usuario': (context) => Usuario(
+              nombre: '',
+              id: " ",
+            ),
+        '/Perfil': (context) => Perfil(),
         '/AggLibros': (context) => AddBook(),
         '/Catalogo': (context) => CatalogoLibros(),
         '/reservas': (context) => LibrosReserv(userId: ''),
-
-       
       },
     );
   }
 }
-

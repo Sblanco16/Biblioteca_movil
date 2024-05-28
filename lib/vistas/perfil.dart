@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rubricatres/metodos_firebase/metodos.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rubricatres/vistas/usuario.dart';
 
 class Perfil extends StatefulWidget {
-  final String userId;
-
-  const Perfil({Key? key, required this.userId}) : super(key: key);
+  const Perfil({Key? key}) : super(key: key);
 
   @override
   _PerfilState createState() => _PerfilState();
@@ -16,6 +16,7 @@ class _PerfilState extends State<Perfil> {
   final TextEditingController contrasenaController = TextEditingController();
   final TextEditingController nombreController = TextEditingController();
   final TextEditingController apellidoController = TextEditingController();
+  final TextEditingController idController = TextEditingController();
   bool generoMasculino = false;
   bool generoFemenino = false;
 
@@ -28,19 +29,27 @@ class _PerfilState extends State<Perfil> {
   }
 
   void cargarDatosUsuario() async {
-    DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('usuario')
-        .doc(widget.userId)
-        .get();
+    SharedPreferences pref = await SharedPreferences.getInstance();
 
-    if (userDoc.exists) {
+    String? id = pref.getString('id');
+    String? correo = pref.getString('email');
+    String? nombre = pref.getString('name');
+    String? apellido = pref.getString('last_name');
+    String? genero = pref.getString('genre');
+
+    if (id != null &&
+        correo != null &&
+        nombre != null &&
+        apellido != null &&
+        genero != null) {
       setState(() {
-        nombreController.text = userDoc['nombre'];
-        apellidoController.text = userDoc['apellido'];
-        correoController.text = userDoc['correo'];
-        contrasenaController.text = userDoc['contrasena'];
-        if (userDoc['genero'] == 'Masculino') {
+        nombreController.text = nombre;
+        apellidoController.text = apellido;
+        correoController.text = correo;
+        idController.text = id;
+        if (genero == 'Masculino') {
           generoMasculino = true;
-        } else if (userDoc['genero'] == 'Femenino') {
+        } else if (genero == 'Femenino') {
           generoFemenino = true;
         }
       });
@@ -51,26 +60,37 @@ class _PerfilState extends State<Perfil> {
     String nombre = nombreController.text.trim();
     String apellido = apellidoController.text.trim();
     String correo = correoController.text.trim();
-    String contrasena = contrasenaController.text.trim();
     String genero = generoMasculino ? 'Masculino' : 'Femenino';
 
-    if (nombre.isNotEmpty && apellido.isNotEmpty && correo.isNotEmpty && contrasena.isNotEmpty) {
+    if (nombre.isNotEmpty && apellido.isNotEmpty && correo.isNotEmpty) {
       Map<String, dynamic> datosActualizados = {
         'nombre': nombre,
         'apellido': apellido,
         'correo': correo,
-        'contrasena': contrasena,
         'genero': genero,
       };
 
-      await servicios.editarUsuario(widget.userId, datosActualizados);
+      await servicios.editarUsuario(idController.text, datosActualizados);
+      SharedPreferences pref = await SharedPreferences.getInstance();
 
+      pref.clear();
+      await pref.setString('id', idController.text);
+      await pref.setString('name', nombre);
+      await pref.setString('last_name', apellido);
+      await pref.setString('email', correo);
+      await pref.setString('genre', genero);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Perfil actualizado ')),
+        const SnackBar(content: Text('Datos actualizados con exito')),
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Usuario(nombre: nombre, id: idController.text),
+        ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor, ingrese los datos')),
+        const SnackBar(content: Text('Por favor, ingrese todos los datos')),
       );
     }
   }
@@ -130,19 +150,6 @@ class _PerfilState extends State<Perfil> {
                       prefixIcon: Icon(Icons.email),
                       border: OutlineInputBorder(),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 16.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: TextField(
-                    controller: contrasenaController,
-                    decoration: const InputDecoration(
-                      labelText: 'Contraseña',
-                      prefixIcon: Icon(Icons.lock),
-                      border: OutlineInputBorder(),
-                    ),
-                    obscureText: true,
                   ),
                 ),
                 const SizedBox(height: 16.0),

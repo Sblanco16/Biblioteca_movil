@@ -26,7 +26,6 @@ class _AddBookPageState extends State<AddBook> {
         SnackBar(content: Text('Libro agregado exitosamente')),
       );
 
-      // Clear the text fields after adding the book
       _titleController.clear();
       _authorController.clear();
       _genreController.clear();

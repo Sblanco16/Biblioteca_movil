@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:rubricatres/vistas/reservas.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Usuario extends StatelessWidget {
   final String nombre;
-
-  Usuario({required this.nombre});
+  final String id;
+  Usuario({required this.nombre, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class Usuario extends StatelessWidget {
               leading: Icon(Icons.person, color: Colors.blue),
               title: Text('Mi Perfil'),
               onTap: () {
-                Navigator.pushNamed(context, '/Perfil',);
+                Navigator.pushNamed(context, '/Perfil');
               },
             ),
             ListTile(
@@ -58,7 +59,12 @@ class Usuario extends StatelessWidget {
               leading: Icon(Icons.book, color: Colors.blue),
               title: Text('Mis Reservas'),
               onTap: () {
-                Navigator.pushNamed(context, '/reservas');
+              Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LibrosReserv(userId: id),
+          ),
+        );
               },
             ),
             ListTile(
