@@ -55,7 +55,7 @@ class LoginState extends State<Login> {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor, ingrese los datos')),
+        const SnackBar(content: Text('Por favor, ingrese los datos :D')),
       );
     }
   }
@@ -80,13 +80,13 @@ class LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blue[50], 
       appBar: AppBar(
-        title: const Text('Iniciar Sesión'),
-        backgroundColor: Colors.blue,
+        title: Text('Iniciar Sesión'),
+        backgroundColor: Colors.blue[700], 
       ),
       body: Padding(
-        padding: const EdgeInsets.all(100),
+        padding: EdgeInsets.all(30),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -96,42 +96,50 @@ class LoginState extends State<Login> {
                 Icon(
                   Icons.library_books,
                   size: 100.0,
-                  color: Colors.blue,
+                  color: Colors.blue[700], 
                 ),
-                const SizedBox(height: 32.0),
+                SizedBox(height: 32.0),
                 TextField(
                   controller: correoController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Correo electrónico',
                     prefixIcon: Icon(Icons.email),
-                      border: OutlineInputBorder(),
+                    border: OutlineInputBorder(),
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 TextField(
                   controller: contrasenaController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Contraseña',
                     prefixIcon: Icon(Icons.lock),
-                      border: OutlineInputBorder(),
+                    border: OutlineInputBorder(),
                   ),
                   obscureText: true,
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: loginUsuario,
-                  child: const Text('Entrar', style: TextStyle(color: Colors.black)),
+                  child: Text(
+                    'Entrar',
+                    style: TextStyle(color: Colors.black),
+                  ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.blue[700], 
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/registro');
                   },
-                  child: const Text('¿No tienes una cuenta? Regístrate aquí', 
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                  child: Text(
+                    '¿No tienes una cuenta? Regístrate aquí',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ],
             ),

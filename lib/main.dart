@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:rubricatres/vistas/AdBook.dart';
+import 'package:rubricatres/vistas/detalles.dart';
 import 'firebase_options.dart';
 import 'package:rubricatres/vistas/registro_usu.dart';
 import 'package:rubricatres/vistas/index.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/AggLibros': (context) => AddBook(),
         '/Catalogo': (context) => CatalogoLibros(),
         '/reservas': (context) => LibrosReserv(userId: ''),
+        '/Detalles':(context)=> DetallesLibro(libroId: ''),
       },
     );
   }

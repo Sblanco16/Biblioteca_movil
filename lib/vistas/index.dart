@@ -6,7 +6,7 @@ class Index extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(90, 7, 151, 187),
       appBar: AppBar(
         title: const Text('Biblioteca Shadai 📚✨'),
         backgroundColor: Colors.blue,
@@ -17,14 +17,6 @@ class Index extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            //    Container(
-            //     decoration: const BoxDecoration(
-            //     image: DecorationImage(
-            //     image: AssetImage("/Images/fondoindex.jpg"),
-            //     fit: BoxFit.cover, 
-            //     ),
-            //   ),
-            // ),
               const Text(
                 'Bienvenidos a nuestra Biblioteca',
                 style: TextStyle(
@@ -39,9 +31,12 @@ class Index extends StatelessWidget {
                   Navigator.pushNamed(context, '/login');
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.white54,
                 ),
-                child: const Text('Comencemos'),
+                child: const Text('Entrar a la biblioteca',style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Roboto', 
+                ),),
               ),
             ],
           ),

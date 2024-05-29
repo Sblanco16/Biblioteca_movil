@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rubricatres/metodos_firebase/metodos.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rubricatres/vistas/usuario.dart';
@@ -98,7 +97,7 @@ class _PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         title: const Text('Editar Perfil'),
         backgroundColor: Colors.blue,
@@ -124,7 +123,8 @@ class _PerfilState extends State<Perfil> {
                     decoration: const InputDecoration(
                       labelText: 'Nombre',
                       prefixIcon: Icon(Icons.person),
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(), 
+                      
                     ),
                   ),
                 ),
